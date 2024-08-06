@@ -668,7 +668,6 @@ fn write_name<T: EntryLike>(
 
         if name.given_name.is_some() {
             ctx.push_str(sort_sep);
-            ctx.ensure_space();
 
             let idx = ctx.push_format(first_format);
             let cidx = ctx.push_case(first_case);
@@ -694,7 +693,6 @@ fn write_name<T: EntryLike>(
 
         if let Some(suffix) = &name.suffix {
             ctx.push_str(sort_sep);
-            ctx.ensure_space();
             ctx.push_str(suffix);
         }
     };
@@ -718,7 +716,6 @@ fn write_name<T: EntryLike>(
 
         if name.given_name.is_some() {
             ctx.push_str(sort_sep);
-            ctx.ensure_space();
 
             let idx = ctx.push_format(first_format);
             let cidx = ctx.push_case(first_case);
@@ -749,7 +746,6 @@ fn write_name<T: EntryLike>(
 
         if let Some(suffix) = &name.suffix {
             ctx.push_str(sort_sep);
-            ctx.ensure_space();
             ctx.push_str(suffix);
         }
     };
