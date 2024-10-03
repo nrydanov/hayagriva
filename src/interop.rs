@@ -1,7 +1,6 @@
 //! Provides conversion methods for BibLaTeX.
 
 use std::convert::TryFrom;
-use std::str::FromStr;
 
 use biblatex as tex;
 use tex::{
@@ -497,7 +496,7 @@ impl TryFrom<&tex::Entry> for Entry {
 
         if let Some(pages) = map_res(entry.pages())? {
             item.set_page_range(match pages {
-                PermissiveType::Typed(pages) => PageRanges::new(
+                PermissiveType::Typed(pages) => MaybeTyped::Typed(PageRanges::new(
                     pages
                         .into_iter()
                         .map(|p| {
@@ -511,9 +510,9 @@ impl TryFrom<&tex::Entry> for Entry {
                             }
                         })
                         .collect(),
-                ),
+                )),
                 PermissiveType::Chunks(chunks) => {
-                    PageRanges::from_str(&chunks.format_verbatim()).unwrap()
+                    MaybeTyped::infallible_from_str(&chunks.format_verbatim())
                 }
             });
         }
